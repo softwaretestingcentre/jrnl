@@ -62,6 +62,21 @@ body {
     background: #fafbfc;
 }
 
+.source-type-select {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 8px 12px;
+    font-size: 1rem;
+    background: #fafbfc;
+}
+
+.note-source-type {
+    color: #34c759;
+    font-weight: 500;
+    margin-right: 8px;
+    text-transform: capitalize;
+}
+
 .save-btn {
     align-self: flex-end;
     background: linear-gradient(90deg, #007aff 60%, #34c759 100%);
@@ -119,4 +134,14 @@ body {
     color: #bbb;
     text-align: center;
     margin-top: 32px;
+}
+
+.search-input {
+    margin-bottom: 24px;
+    width: 100%;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 1rem;
+    background: #fafbfc;
 }

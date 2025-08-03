@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 export interface Note {
     id: string;
     note: string;
     source: string;
+    sourceType: string;
     timestamp: string;
     keywords: string[];
     themes: string[];
@@ -11,16 +12,42 @@ export interface Note {
 
 type NotesContextType = {
     notes: Note[];
-    addNote: (note: Omit<Note, 'id' | 'timestamp' | 'keywords' | 'themes'>) => void;
+    addNote: (note: Omit<Note, 'id' | 'timestamp' | 'keywords' | 'themes'>) => Promise<void>;
+    refresh: () => void;
 };
 
 const NotesContext = createContext<NotesContextType | undefined>(undefined);
 
+const API_URL = 'http://localhost:4000/api/notes';
+
 export function NotesProvider({ children }: { children: React.ReactNode }) {
     const [notes, setNotes] = useState<Note[]>([]);
 
+    // Fetch notes from backend
+    const refresh = () => {
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(setNotes)
+            .catch(() => setNotes([]));
+    };
+
+    useEffect(() => {
+        refresh();
+    }, []);
+
+    async function addNote({ note, source, sourceType }: { note: string; source: string; sourceType: string }) {
+        // You may want to generate keywords/themes here or on the backend
+        const keywords = extractKeywords(note);
+        const themes = extractThemes(note);
+        await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ note, source, sourceType, keywords, themes }),
+        });
+        refresh();
+    }
+
     function extractKeywords(note: string): string[] {
-        // Simple keyword extraction (replace with NLP/GPT in production)
         return note
             .toLowerCase()
             .split(/\W+/)
@@ -28,29 +55,12 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
     }
 
     function extractThemes(note: string): string[] {
-        // Simple theme extraction (stub)
         if (note.toLowerCase().includes('environment')) return ['environmental science', 'conservation'];
         return [];
     }
 
-    function addNote({ note, source }: { note: string; source: string }) {
-        const keywords = extractKeywords(note);
-        const themes = extractThemes(note);
-        setNotes([
-            ...notes,
-            {
-                id: Math.random().toString(36).slice(2),
-                note,
-                source,
-                timestamp: new Date().toISOString(),
-                keywords,
-                themes,
-            },
-        ]);
-    }
-
     return (
-        <NotesContext.Provider value={{ notes, addNote }}>
+        <NotesContext.Provider value={{ notes, addNote, refresh }}>
             {children}
         </NotesContext.Provider>
     );

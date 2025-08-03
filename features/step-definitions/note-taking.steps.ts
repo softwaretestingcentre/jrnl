@@ -1,5 +1,5 @@
+import { DataTable,Given, Then, When } from '@cucumber/cucumber';
 import { Actor } from '@serenity-js/core';
-import { Given, Then, When, DataTable } from '@cucumber/cucumber';
 import { Navigate } from '@serenity-js/web';
 
 
@@ -15,7 +15,7 @@ When('{actor} enters a note with a source', async (actor: Actor, note: DataTable
   )
 );
 
-Then('{actor} sees that the note has been saved with a timestamp and the correct keywords, themes, and sources', async (actor: Actor, metaData: DataTable) => 
+Then('{actor} sees that the note has been saved with a timestamp and the correct keywords, themes, and source', async (actor: Actor, metaData: DataTable) => 
   actor.attemptsTo(
       // Write code here that turns the phrase above into concrete actions
   )
