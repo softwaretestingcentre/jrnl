@@ -3,17 +3,17 @@
     "jsx": "react-jsx",
     "target": "es2019",
     "lib": ["es2019", "dom"],
-    "module": "esnext",
-    "moduleResolution": "bundler",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "sourceMap": true,
     "declaration": true,
-    // "types": [
-    //   "node",
-    //   "vite/client"
-    // ]
+    "types": [
+      "node",
+      "vite/client"
+    ]
   },
 
   "include": [

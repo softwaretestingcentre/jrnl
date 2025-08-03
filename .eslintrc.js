@@ -35,13 +35,13 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
 
         'indent': 'off',
-        '@typescript-eslint/indent': ['error', 4, {
+        '@typescript-eslint/indent': ['error', 2, {
             'MemberExpression': 'off',
             'SwitchCase': 1,
         }],
 
         'quotes': 'off',
-        '@typescript-eslint/quotes': ['error', 'single', {
+        '@typescript-eslint/quotes': [{
             'allowTemplateLiterals': true,
             'avoidEscape': true,
         }],
