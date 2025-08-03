@@ -1,0 +1,22 @@
+import { Actor } from '@serenity-js/core';
+import { Given, Then, When, DataTable } from '@cucumber/cucumber';
+import { Navigate } from '@serenity-js/web';
+
+
+Given('{actor} is on the note-taking page', async (actor: Actor) =>
+    actor.attemptsTo(
+        Navigate.to('/note-taking')
+    )
+);
+
+When('{actor} enters a note with a source', async (actor: Actor, note: DataTable) => 
+  actor.attemptsTo(
+      // Write code here that turns the phrase above into concrete actions
+  )
+);
+
+Then('{actor} sees that the note has been saved with a timestamp and the correct keywords, themes, and sources', async (actor: Actor, metaData: DataTable) => 
+  actor.attemptsTo(
+      // Write code here that turns the phrase above into concrete actions
+  )
+);
