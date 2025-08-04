@@ -20,7 +20,8 @@
     "features/**/*.ts",
     "test/**/*.ts",
     "src",
-    "vite.config.ts"
+    "vite.config.ts",
+    "server.js"
   ],
 
   "exclude": [

@@ -1,6 +1,7 @@
 import { DataTable, Given, Then, When } from "@cucumber/cucumber";
 import { Actor } from "@serenity-js/core";
 import { Navigate } from "@serenity-js/web";
+
 import { JournalEditor } from "../../test/jrnl-ui/JournalEditor";
 
 Given("{actor} is on the note-taking page", async (actor: Actor) =>

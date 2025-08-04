@@ -2,8 +2,10 @@
   "extends": "./tsconfig",
   "include": [
     "features/**/*.ts",
-    "src/**/*.ts",
-    "src/**/*.tsx"
+    "test/**/*.ts",
+    "src",
+    "vite.config.ts",
+    "server.js"
   ],
   "exclude": [
     "node_modules"
