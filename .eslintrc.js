@@ -41,7 +41,7 @@ module.exports = {
         }],
 
         'quotes': 'off',
-        '@typescript-eslint/quotes': [{
+        '@typescript-eslint/quotes': ['warn', 'single', {
             'allowTemplateLiterals': true,
             'avoidEscape': true,
         }],
