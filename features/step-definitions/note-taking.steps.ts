@@ -14,11 +14,30 @@ When(
     actor.attemptsTo(JournalEditor.createNote(note))
 );
 
-Then(
-  "{actor} sees that the note has been saved with a timestamp and the correct keywords, themes, and source",
-  async (actor: Actor, metaData: DataTable) =>
-    actor
-      .attemptsTo
-      // Write code here that turns the phrase above into concrete actions
-      ()
+Then('{actor} sees that the note has been saved with a timestamp and the correct keywords and source', async (actor: Actor, metadata: DataTable) => 
+  actor.attemptsTo(
+    JournalEditor.checkTimestamp(),
+    JournalEditor.checkMetadata(metadata),
+  )
 );
+
+When('{actor} searches for notes with the keyword {string}', async (actor: Actor, keyword: string) =>
+  actor.attemptsTo(JournalEditor.searchNotes(keyword))
+);
+
+Then('{actor} sees a list of notes that include the keyword {string}', async (actor: Actor, keyword: string) => {
+  actor.attemptsTo(
+    JournalEditor.allNotesMatch(keyword)
+  );
+})
+
+When('{actor} deletes the {string} note', async (actor: Actor, noteText: string) => 
+  actor.attemptsTo(JournalEditor.deleteNote(noteText))
+)
+
+Then('{actor} sees that the {string} note has been removed', async (actor: Actor, noteText: string) => {
+  actor.attemptsTo(
+    JournalEditor.noNotesMatch(noteText)
+  );
+})
+

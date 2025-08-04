@@ -56,6 +56,17 @@ app.post('/api/notes', (req, res) => {
   );
 });
 
+
+// Delete a note by id
+app.delete('/api/notes/:id', (req, res) => {
+  const { id } = req.params;
+  db.run('DELETE FROM notes WHERE id = ?', [id], function (err) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (this.changes === 0) return res.status(404).json({ error: 'Note not found' });
+    res.json({ success: true });
+  });
+});
+
 // Search notes by keyword
 app.get('/api/notes/search', (req, res) => {
   const { keyword } = req.query;
