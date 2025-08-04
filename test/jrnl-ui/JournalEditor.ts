@@ -1,6 +1,6 @@
 import { DataTable } from "@cucumber/cucumber";
 import { List, Task } from "@serenity-js/core";
-import { By, Click, Enter, PageElement } from "@serenity-js/web";
+import { By, Click, Enter, PageElement, Select } from "@serenity-js/web";
 
 export const JournalEditor = {
   createNote: (noteContent: DataTable) =>
@@ -9,7 +9,7 @@ export const JournalEditor = {
       List.of(noteContent.hashes()).forEach(({ actor, item }) =>
         actor.attemptsTo(
           Enter.theValue(item["note"]).into(noteEditor.noteDetails()),
-          Enter.theValue(item["source type"]).into(noteEditor.sourceType()),
+          Select.value(item["source type"]).from(noteEditor.sourceType()),
           Enter.theValue(item["source"]).into(noteEditor.source()),
           Click.on(noteEditor.saveButton())
         )
