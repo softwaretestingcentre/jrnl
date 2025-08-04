@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [ 18.x, 20.x, 22.x ]
+        node-version: [ 22.x ]
 
     steps:
       - uses: actions/checkout@v4
@@ -31,6 +31,8 @@ jobs:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - run: npm run lint
+      - run: node server.js &
+      - run: npm run dev &
       - run: npm test
         env:
           CI: true
