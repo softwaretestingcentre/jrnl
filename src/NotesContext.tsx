@@ -7,12 +7,11 @@ export interface Note {
   sourceType: string;
   timestamp: string;
   keywords: string[];
-  themes: string[];
 }
 
 type NotesContextType = {
   notes: Note[];
-  addNote: (note: Omit<Note, 'id' | 'timestamp' | 'keywords' | 'themes'>) => Promise<void>;
+  addNote: (note: Omit<Note, 'id' | 'timestamp' | 'keywords'>) => Promise<void>;
   deleteNote: (id: string) => Promise<void>;
   refresh: () => void;
 };
@@ -37,13 +36,12 @@ export function NotesProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function addNote({ note, source, sourceType }: { note: string; source: string; sourceType: string }) {
-    // You may want to generate keywords/themes here or on the backend
+    // You may want to generate keywords here or on the backend
     const keywords = extractKeywords(note);
-    const themes = extractThemes(note);
     await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ note, source, sourceType, keywords, themes }),
+      body: JSON.stringify({ note, source, sourceType, keywords }),
     });
     refresh();
   }
@@ -60,13 +58,6 @@ function extractKeywords(note: string): string[] {
     .toLowerCase()
     .split(/\W+/)
     .filter((word, index, array) => word && array.indexOf(word) === index && word.length > 3);
-}
-
-function extractThemes(note: string): string[] {
-  if (note.toLowerCase().includes('environment')) {
-      return ['environmental science', 'conservation'];
-  }
-  return [];
 }
 
   return (

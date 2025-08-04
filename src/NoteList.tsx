@@ -38,7 +38,6 @@ export default function NoteList({ search }: NoteListProps) {
           </div>
           <div className="note-tags">
             <span className="note-keywords">{note.keywords.join(", ")}</span>
-            <span className="note-themes">{note.themes.join(", ")}</span>
           </div>
           <button
             className="delete-btn"
