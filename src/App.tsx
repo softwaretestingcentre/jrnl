@@ -15,17 +15,22 @@ export default function App() {
                     <h1>JRNL</h1>
                     <p className="subtitle">A note taking app that understands what you write</p>
                 </header>
-                <main>
-                    <NoteEditor />
-                    <input
-                        className="search-input"
-                        type="text"
-                        placeholder="Search notes by keyword…"
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        style={{marginBottom: 24, width: '100%', padding: 8, borderRadius: 8, border: '1px solid #e0e0e0'}}
-                    />
-                    <NoteList search={search} />
+                <main className="main-3col">
+                    <aside className="sidebar search-col">
+                        <input
+                            className="search-input"
+                            type="text"
+                            placeholder="Search notes by keyword…"
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                        />
+                    </aside>
+                    <section className="editor-col">
+                        <NoteEditor />
+                    </section>
+                    <aside className="sidebar notes-col">
+                        <NoteList search={search} />
+                    </aside>
                 </main>
             </div>
         </NotesProvider>
